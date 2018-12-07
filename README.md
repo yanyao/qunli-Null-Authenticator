@@ -17,6 +17,12 @@ To install `nullauthenticator`, enter in a terminal:
 python3 -m pip install nullauthenticator
 ```
 
+源码安装
+```
+cd nullauthenticator
+python3 setup.py install
+```
+
 ## Usage
 
 Enable null authenticator in `jupyterhub_config.py`:
