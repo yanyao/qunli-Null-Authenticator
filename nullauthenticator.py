@@ -35,5 +35,5 @@ class NullAuthenticator(Authenticator):
     def authenticate(self, handler, data):
         if data:
             return data['username']
-        else :
-            return 'admin'
+        # else :
+        #     return 'admin'
