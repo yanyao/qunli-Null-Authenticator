@@ -7,6 +7,8 @@ e.g. only allowing access via API tokens.
 # Copyright (c) Jupyter Development Team.
 # Distributed under the terms of the Modified BSD License.
 
+from tornado.auth import OAuth2Mixin
+from tornado import gen, web
 from jupyterhub.auth import Authenticator
 from jupyterhub.handlers.base import BaseHandler
 
