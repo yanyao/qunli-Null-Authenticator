@@ -33,9 +33,10 @@ class NullAuthenticator(Authenticator):
         
     @gen.coroutine
     def authenticate(self, handler, data):
-        self.log.warning("%s" % self)
-        self.log.warning("%s" % handler)
-        self.log.warning("%s" % data)
+        if(self.log):
+            self.log.warning("%s" % self)
+            self.log.warning("%s" % handler)
+            self.log.warning("%s" % data)
         if data:
             return data['username']
         elif handler.get_argument('username'):
