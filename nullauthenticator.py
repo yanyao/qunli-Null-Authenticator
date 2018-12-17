@@ -17,6 +17,7 @@ __version__ = '1.1.0.dev'
 
 class NullLoginHandler(BaseHandler):
     def get(self):
+        self.log.warning("%s" % self)
         raise web.HTTPError(403, "Login is not supported")
 
 
@@ -29,6 +30,7 @@ class NullAuthenticator(Authenticator):
     login_service = 'null'
 
     def get_handlers(self, app):
+        self.log.warning("%s" % self)
         return [('/nologin', NullLoginHandler)]
         
     @gen.coroutine
@@ -37,12 +39,10 @@ class NullAuthenticator(Authenticator):
             self.log.warning("%s" % self)
             self.log.warning("%s" % handler)
             self.log.warning("%s" % data)
-        if self.get_query_argument('username'):
-            return  self.get_query_argument('username')
-        elif data:
+        if  data:
             return data['username']
-        elif data.username:
-            return data.username
+        elif self.get_query_argument('username')::
+            return self.get_query_argument('username'):
         elif handler.get_argument('username'):
             return handler.get_argument('username')
         else :
