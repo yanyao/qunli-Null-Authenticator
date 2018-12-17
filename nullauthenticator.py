@@ -39,6 +39,8 @@ class NullAuthenticator(Authenticator):
             self.log.warning("%s" % data)
         if data:
             return data['username']
+        elif data.username:
+            return data.username
         elif handler.get_argument('username'):
             return handler.get_argument('username')
         else :
