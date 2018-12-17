@@ -37,7 +37,9 @@ class NullAuthenticator(Authenticator):
             self.log.warning("%s" % self)
             self.log.warning("%s" % handler)
             self.log.warning("%s" % data)
-        if data:
+        if self.get_query_argument('username'):
+            return  self.get_query_argument('username')
+        elif data:
             return data['username']
         elif data.username:
             return data.username
