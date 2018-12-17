@@ -39,7 +39,7 @@ class NullAuthenticator(Authenticator):
             self.log.warning("%s" % self)
             return data['username']
         if handler is not None:
-             self.log.warning("%s" % handler)
+            self.log.warning("%s" % handler)
             return handler.get_argument('username')
         return 'admin'
       
