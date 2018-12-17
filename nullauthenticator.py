@@ -35,16 +35,11 @@ class NullAuthenticator(Authenticator):
         
     @gen.coroutine
     def authenticate(self, handler, data):
-        if(self.log):
+        if data is not None:
             self.log.warning("%s" % self)
-            self.log.warning("%s" % handler)
-            self.log.warning("%s" % data)
-        if data:
             return data['username']
-        elif self.get_query_argument('username'):
-            return self.get_query_argument('username')
-        elif handler.get_argument('username'):
+        if handler is not None:
+             self.log.warning("%s" % handler)
             return handler.get_argument('username')
-        else :
-            return None
+        return 'admin'
       
