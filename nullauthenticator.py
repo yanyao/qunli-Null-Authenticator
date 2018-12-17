@@ -7,8 +7,8 @@ e.g. only allowing access via API tokens.
 # Copyright (c) Jupyter Development Team.
 # Distributed under the terms of the Modified BSD License.
 
-# from tornado.auth import OAuth2Mixin
-# from tornado import gen, web
+from tornado.auth import OAuth2Mixin
+from tornado import gen, web
 from jupyterhub.auth import Authenticator
 from jupyterhub.handlers.base import BaseHandler
 
@@ -31,12 +31,15 @@ class NullAuthenticator(Authenticator):
     def get_handlers(self, app):
         return [('/nologin', NullLoginHandler)]
         
-    # @gen.coroutine
-    # def authenticate(self, handler, data):
-    #     if data:
-    #         return data['username']
-    #     elif handler.get_argument('username'):
-    #         return handler.get_argument('username')
-    #     else :
-    #         return None
+    @gen.coroutine
+    def authenticate(self, handler, data):
+        self.log.warning("%s" % self)
+        self.log.warning("%s" % handler)
+        self.log.warning("%s" % data)
+        if data:
+            return data['username']
+        elif handler.get_argument('username'):
+            return handler.get_argument('username')
+        else :
+            return None
       
